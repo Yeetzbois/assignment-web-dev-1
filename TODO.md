@@ -1,0 +1,4 @@
+- find out how to separate the styling within <style> tag into a separate .css file
+- find out a different method to render the content for navigation submenus
+    - by splitting into multipe html files instead of one single HTML file
+    - hint: using innerHtml to inject the html code using javascript
