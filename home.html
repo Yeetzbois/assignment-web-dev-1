@@ -4,242 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Everyday Eco-Wins: Simple Actions for a Greener Tomorrow</title>
-    <style>
-        /* testing */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f8ff;
-            color: #333;
-        }
-        header {
-            background-color: #2b7a78;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            background-color: #17252a;
-        }
-        nav ul li {
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            display: block;
-        }
-        nav ul li a:hover {
-            background-color: #3aafa9;
-        }
-
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-            }
-
-            #feedback-section {
-                padding: 10px;
-            }
-        }
-
-
-
-        main {
-            padding: 20px;
-            text-align: center;
-        }
-        .content {
-            display: none;
-        }
-        .content.active {
-            display: block;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #2b7a78;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #3aafa9;
-        }
-        #feedbackResult {
-            margin-top: 20px;
-            color: green;
-        }
-        .transparent-image {
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        .transparent-image:hover {
-            opacity: 0.8;
-        }
-        input, textarea {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background: #ecf0f1;
-            border-left: 4px solid #27ae60;
-        }
-        .transparent-image {
-            opacity: 1; /* 20% transparency */
-            transition: opacity 0.3s ease; /* Smooth transition for opacity change */
-        }
-        .transparent-image:hover {
-            opacity: 0.1; /* Full opacity on hover */
-        }
-
-    </style>
-    <script>
-        function showContent(section) {
-            const sections = document.querySelectorAll('.content');
-            sections.forEach(sec => {
-                sec.classList.remove('active');
-            });
-            document.getElementById(section).classList.add('active');
-        }
-
-        function calculateFootprint() {
-            const electricity = parseFloat(document.getElementById("electricity").value) || 0;
-            const car = parseFloat(document.getElementById("car").value) || 0;
-            const meat = parseFloat(document.getElementById("meat").value) || 0;
-
-            const electricityEmissions = electricity * 0.45;
-            const carEmissions = car * 0.21;
-            const meatEmissions = meat * 7;
-
-            const totalEmissions = electricityEmissions + carEmissions + meatEmissions;
-
-            let recommendations = "<strong>Recommendations:</strong><ul>";
-
-            let temp = ""
-            if (electricity >= 300) temp += "<li>Reduce electricity usage by switching to energy-efficient appliances.</li>";
-            if (car >= 100) temp += "<li>Consider carpooling or using public transport.</li>";
-            if (meat >= 7) temp += "<li>Try replacing some meat meals with plant-based alternatives.</li>";
-            
-            console.log(`temp.length : ${temp.length}`)
-            if (temp.length == 0){
-                temp += "<li>Your carbon emissions looks fine.</li>";
-            }
-            temp += "</ul>";
-            recommendations += temp;
-            
-            const resultDiv = document.getElementById("result");
-            resultDiv.style.display = "block";
-            resultDiv.innerHTML = `
-                <p>Your estimated monthly carbon footprint is <strong>${totalEmissions.toFixed(2)} kg CO2</strong>.</p>
-                ${recommendations}
-            `;
-        }
-
-        function feedbackSubmit() {
-            // Get form elements
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-            const feedbackResponse = document.getElementById('feedback-response');
-
-            // Validate inputs
-            if (!nameInput.value.trim()) {
-                feedbackResponse.textContent = 'Please enter your name.';
-                feedbackResponse.style.color = 'red';
-                nameInput.focus();
-                return;
-            }
-
-            // Simple email validation regex
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value)) {
-                feedbackResponse.textContent = 'Please enter a valid email address.';
-                feedbackResponse.style.color = 'red';
-                emailInput.focus();
-                return;
-            }
-
-            if (!messageInput.value.trim()) {
-                feedbackResponse.textContent = 'Please enter a message.';
-                feedbackResponse.style.color = 'red';
-                messageInput.focus();
-                return;
-            }
-
-            // Construct mailto link
-            const subject = encodeURIComponent("Feedback from Everyday Eco-Wins");
-            const body = encodeURIComponent(`
-                Name: ${nameInput.value.trim()}
-                Email: ${emailInput.value.trim()}
-
-                Message:
-                ${messageInput.value.trim()}
-            `);
-
-            // Open default email client
-            window.location.href = `mailto:koayjiale999@gmail.com?subject=${subject}&body=${body}`;
-
-            // Clear form inputs
-            nameInput.value = '';
-            emailInput.value = '';
-            messageInput.value = '';
-
-            // Show success message
-            feedbackResponse.textContent = 'Your email client should now open. Please send the message.';
-            feedbackResponse.style.color = 'green';
-        }
-    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script> 
 </head>
 <body>
     <header>
         <h1>Everyday Eco-Wins: Simple Actions for a Greener Tomorrow</h1>
         <nav>
-            <ul>
-                <li><a href="#" onclick="showContent('home')">Home</a></li>
-                <li><a href="#" onclick="showContent('causes')">Causes</a></li>
-                <li><a href="#" onclick="showContent('solutions')">Solutions</a></li>
-                <li><a href="#" onclick="showContent('effects')">Effects</a></li>
-                <li><a href="#" onclick="showContent('calculator')">Calculator</a></li>
-                <li><a href="#" onclick="showContent('feedback')">Feedback</a></li>
-            </ul>
+            <div>
+                <button onclick="showContent('home')">Home</button>
+                <button onclick="showContent('causes')">Causes</button>
+                <button onclick="showContent('solutions')">Solutions</button>
+                <button onclick="showContent('effects')">Effects</button>
+                <button onclick="showContent('calculator')">Calculator</button>
+                <button onclick="showContent('feedback')">Feedback</button>
+
+            </div>
         </nav>
     </header>
     <main>
+
         <section id="home" class="content active">
             <h2>🌍Welcome to Everyday Eco-Wins: Simple Actions for a Greener Tomorrow</h2>
             <p>Learn about climate change and how to take urgent action to combat it.</p>
