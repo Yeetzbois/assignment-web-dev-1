@@ -169,6 +169,60 @@
                 ${recommendations}
             `;
         }
+
+        function feedbackSubmit() {
+            // Get form elements
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            const feedbackResponse = document.getElementById('feedback-response');
+
+            // Validate inputs
+            if (!nameInput.value.trim()) {
+                feedbackResponse.textContent = 'Please enter your name.';
+                feedbackResponse.style.color = 'red';
+                nameInput.focus();
+                return;
+            }
+
+            // Simple email validation regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value)) {
+                feedbackResponse.textContent = 'Please enter a valid email address.';
+                feedbackResponse.style.color = 'red';
+                emailInput.focus();
+                return;
+            }
+
+            if (!messageInput.value.trim()) {
+                feedbackResponse.textContent = 'Please enter a message.';
+                feedbackResponse.style.color = 'red';
+                messageInput.focus();
+                return;
+            }
+
+            // Construct mailto link
+            const subject = encodeURIComponent("Feedback from Everyday Eco-Wins");
+            const body = encodeURIComponent(`
+                Name: ${nameInput.value.trim()}
+                Email: ${emailInput.value.trim()}
+
+                Message:
+                ${messageInput.value.trim()}
+            `);
+
+            // Open default email client
+            window.location.href = `mailto:youremail@example.com?subject=${subject}&body=${body}`;
+
+            // Clear form inputs
+            nameInput.value = '';
+            emailInput.value = '';
+            messageInput.value = '';
+
+            // Show success message
+            feedbackResponse.textContent = 'Your email client should now open. Please send the message.';
+            feedbackResponse.style.color = 'green';
+        }
     </script>
 </head>
 <body>
@@ -260,7 +314,7 @@
 
             </form>
 
-            <button type="submit">Submit</button>
+            <button type="submit" onclick="feedbackSubmit()">Submit</button>
             <p id="feedback-response"></p>
         </section>
 </main>
