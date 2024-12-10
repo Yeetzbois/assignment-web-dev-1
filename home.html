@@ -38,6 +38,24 @@
         nav ul li a:hover {
             background-color: #3aafa9;
         }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            #feedback-section {
+                padding: 10px;
+            }
+        }
+
+
+
         main {
             padding: 20px;
             text-align: center;
@@ -109,7 +127,6 @@
             opacity: 0.1; /* Full opacity on hover */
         }
 
-
     </style>
     <script>
         function showContent(section) {
@@ -173,7 +190,7 @@
             <h2>🌍Welcome to Everyday Eco-Wins: Simple Actions for a Greener Tomorrow</h2>
             <p>Learn about climate change and how to take urgent action to combat it.</p>
             <a href="https://sdgs.un.org/goals/goal13#overview" target="_blank">
-                <img src="image.jpg" alt="Earth" class="transparent-image" width="600">
+                <img src="image.jpg" alt="Earth" class="transparent-image" width="60%">
             </a>
             <h3>Please click for more information:</h3>
 
@@ -183,7 +200,7 @@
             <h2>🔥Causes of Climate Change</h2>
             <p>Human activities like deforestation and burning fossil fuels contribute to climate change.</p>
             <a href="https://medium.com/@zohaibbinaslam/climate-change-causes-effects-and-solutions-1a566603f263" target="_blank"> 
-                <img src="image.png" alt="Causes" class="transparent-image" width="600">
+                <img src="image.png" alt="Causes" class="transparent-image" width="60%">
             </a>
         </section>
 
@@ -192,7 +209,7 @@
             <p>Improve education, awareness-raising, and institutional capacity on climate change mitigation and adaptation.</p>
         </h2>
         <a href="https://www.interacademies.org/publication/climate-change-and-biodiversity" target="_blank"> 
-            <img src="image.jpg2.png" alt="Transparent Image" width="1000" height="600" class="transparent-image">
+            <img src="image.jpg2.png" alt="Transparent Image" width="60%" height="auto" class="transparent-image">
         </a>
         </section>
 
@@ -203,7 +220,7 @@
                 <li>Improved Air and Water Quality</li>
                 <li>Biodiversity Preservation</li>
             </p>
-            <img src="image2.png" alt="Transparent Image" width="1000" height="600" class="transparent-image">
+            <img src="image2.png" alt="Transparent Image" width="60%" height="auto" class="transparent-image">
         </section>
 
         <section id="calculator" class="content">
