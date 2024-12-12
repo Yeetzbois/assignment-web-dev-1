@@ -27,21 +27,23 @@ nav button {
     display: block;
     margin: 0 10px;
     background-color: transparent;
-    text-align: center;
     
 }
+
 nav button:hover {
     background-color: #3aafa9;
 }
 
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
+    nav {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Ensure buttons are centered horizontally */
     }
 
-    nav ul li {
-        margin: 5px 0;
+    nav button {
+        margin: 10px 0; /* Add spacing between buttons */
+        width: 100%; /* Make buttons take full width of the container */
+        text-align: center; /* Ensure text inside the button is centered */
     }
 
     #feedback-section {
