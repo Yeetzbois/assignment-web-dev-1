@@ -28,6 +28,7 @@ nav button {
     margin: 0 10px;
     background-color: transparent;
     text-align: center;
+    
 }
 nav button:hover {
     background-color: #3aafa9;
